@@ -1,4 +1,10 @@
 # Bag-of-Words
-Algorithm that implements a parser to validate propositional logic expressions made in Python.
 
-Link of the code running in <a href="https://colab.research.google.com/drive/1zEGqIsgzeJ3bfB6Tq3TKRPej8tJsnGSR?usp=sharing/">Google Colaboratory.</a>
+This project implements a Bag-of-Words (BoW) model to process text from multiple web pages, extract unique words, and count their occurrences.
+
+## Features
+
+- Scrapes content from multiple URLs.
+- Removes HTML tags, scripts, and styles.
+- Tokenizes text into words and generates a BoW matrix.
+- Displays the result in a DataFrame.
