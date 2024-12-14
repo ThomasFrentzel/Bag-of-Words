@@ -1,6 +1,6 @@
 # Bag-of-Words
 
-This project implements a Bag-of-Words (BoW) model to process text from multiple web pages, extract unique words, and count their occurrences.
+Python implementation of the Bag-of-Words (BoW) model to scrape text from multiple web pages, extract unique words, and calculate their frequencies in a term-document matrix.
 
 ## Features
 
