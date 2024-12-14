@@ -3,11 +3,11 @@ import pandas
 import requests
 from bs4 import BeautifulSoup
 
-palavras = [] #Para armazenar as sentenças em cinco listas diferentes.
-unicos = [] #Para armazenar as sentenças em cinco listas diferentes.
-vetor = [] #Aqui é para verificar o numero de vezes que uma palavra aparece em um #determinado arquivo
+words = []  
+unique_words = []  
+vector = []  
 
-#urls:
+# URLs to scrape
 urls = ['https://www.ibm.com/cloud/learn/natural-language-processing', 
         'https://en.wikipedia.org/wiki/Natural_language_processing', 
         'https://monkeylearn.com/natural-language-processing/',
@@ -15,34 +15,34 @@ urls = ['https://www.ibm.com/cloud/learn/natural-language-processing',
         'https://magnimindacademy.com/blog/how-do-natural-language-processing-systems-work/']
 
 for site in urls:
-    url = requests.get(site).content#guardar o conteudo do site
+    url = requests.get(site).content  
     soup = BeautifulSoup(url, "html.parser")
-    for data in soup(['style', 'script']):#remover os scripts e estilos
-        data.decompose()#remover os scripts e estilos
-    palavra = ' '.join(soup.stripped_strings)
-    palavra = re.sub(r"[\n\t]", "", palavra)#remover os espaços em branco
-    separadores = re.split("[!?.;:,]", palavra)#separar as sentenças
-    palavras.append(" ".join(separadores))#adicionar as sentenças em uma lista
+    for data in soup(['style', 'script']):  
+        data.decompose()  
+    text = ' '.join(soup.stripped_strings)
+    text = re.sub(r"[\n\t]", "", text)  
+    separators = re.split("[!?.;:,]", text)  
+    words.append(" ".join(separators))
 
-def unico(p): #verificar se a palavra já existe no vetor
-  sem_rep = set() #criar um conjunto vazio
-  for array in p: #percorrer o vetor
-    for palavra in array.split(): #percorrer cada palavra do vetor
-        sem_rep.add(palavra) #adicionar a palavra no conjunto
-  return sem_rep #retornar o conjunto
+def unique(p):  
+    no_duplicates = set()
+    for array in p:
+        for word in array.split():
+            no_duplicates.add(word)
+    return no_duplicates
 
-unicos = unico(palavras) #chamar a função unico
-unicos = list(unicos) #transformar o conjunto em lista para poder usar o index
-print(len(unicos)) #imprimir o tamanho do vetor
+unique_words = unique(words)  
+unique_words = list(unique_words)  
+print(len(unique_words))  
 
-def BOW(arrayDePalavras, texto): #função para gerar a matriz termo documento
-  array = [0] * len(arrayDePalavras)  #criar um vetor com o tamanho do vetor de palavras
-  for string in texto.split(): #percorrer cada palavra do texto
-    array[arrayDePalavras.index(string)] += 1 #adicionar 1 no vetor na posição da palavra
-  return array #retornar o vetor
+def BOW(wordArray, text):  
+    array = [0] * len(wordArray)
+    for string in text.split():
+        array[wordArray.index(string)] += 1
+    return array
 
-for array in palavras: #percorrer cada sentença
-    vetor.append(BOW(unicos, array)) #chamar a função BOW e adicionar o vetor na lista
+for array in words:
+    vector.append(BOW(unique_words, array))  
 
-df = pandas.DataFrame(vetor, columns=unicos) #criar um dataframe com o vetor e as palavras
-display(df) #imprimir o dataframe
+df = pandas.DataFrame(vector, columns=unique_words)  
+display(df)
