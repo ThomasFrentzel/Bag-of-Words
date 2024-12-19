@@ -9,9 +9,10 @@ Python implementation of the Bag-of-Words (BoW) model to scrape text from multip
 - Tokenizes text into words and generates a BoW matrix.
 - Displays the result in a DataFrame.
 
-## Cloning the Repository
+## Clone the Repository
 
 To get started with the project, clone the repository:
 
 ```bash
 git clone https://github.com/ThomasFrentzel/Bag-of-Words
+```
